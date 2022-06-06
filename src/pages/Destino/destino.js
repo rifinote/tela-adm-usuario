@@ -1,12 +1,34 @@
-import "../Criar/criar.css";
-import imgagemEscolhida from "./logo.png";
+import "../../App.css";
+import "../Cadastro/cadastro.css"
+import imgagemEscolhida from "../../components/Img/logo.png";
+import { useState } from "react";
+import {useNavigate} from "react-router-dom"
+import {Link}  from "react-router-dom";
+
+
+
 function Destino() {
+  const navigate = useNavigate();
+
+  const[origin, setOrigin] = useState("");
+  const[destination, setDestination] = useState("");
+  const[date, setDate] = useState("");
+  const[datev, setDatev] = useState("");
+  const[valor, setValor] = useState("");
+ const [error, setError] = useState("");
+  const handleDestino = () => {
+    if ( !origin | !destination | !date | !datev | !valor ) {
+    setError ("*Preencha todos os campos");
+    return;
+    }
+    navigate("/Cadastro");
+  }
   return (
     <div>
       <img class= "img1"src={imgagemEscolhida} />
       <ul>
         <li>
-          <a href="#home">Home</a>
+            <Link to="/">Home</Link>
         </li>
         <li>
           <a href="#news">Como Funciona</a>
@@ -17,14 +39,14 @@ function Destino() {
         <li>
           <a href="#about">Quem já viajou</a>
         </li>
-        <button class="secundary-button">Entrar</button>
-        <button class="secundary-button">Criar</button>
+        <Link to="/Login"><button className="secundary-button">Entrar</button></Link>
+        <Link to="/Criar"><button className="secundary-button">Criar</button></Link>
       </ul>
 
-      <div class="card_form0">
+      <div className="card_form0">
         <h1 id="box-title">COMECE AGORA!</h1>
         <form id="form0" name="userForm" action="./form1.html" method="GET">
-          <label for="origin" class="input-title2" required>
+          <label htmlfor="origin" className="input-title2" required>
             Origem
           </label>
           <input
@@ -32,9 +54,11 @@ function Destino() {
             id="origin"
             name="origin"
             placeholder="Exemplo: Recife, São Paulo"
+            value={origin}
+            onChange={(e) => [setOrigin(e.target.value), setError("")]}
           />
 
-          <label for="destination" class="input-title2" required>
+          <label htmlFor="destination" className="input-title2" required>
             Destino Principal{" "}
           </label>
           <input
@@ -42,9 +66,11 @@ function Destino() {
             id="destination"
             name="destination"
             placeholder="Exemplo: Orlando, Flórida"
+            value={destination}
+            onChange={(e) => [setDestination(e.target.value), setError("")]}
           />
 
-          <label for="guests" class="input-title2">
+          <label htmlFor="guests" className="input-title2">
             Número de Pessoas
           </label>
           <select id="guests" name="propertyType" class="input-field2">
@@ -54,28 +80,33 @@ function Destino() {
             <option value="four">4</option>
             <option value="five">5+</option>
           </select>
+          
 
-          <label for="checkInDate" class="input-title2">
+          <label htmlFor="checkInDate" className="input-title2">
             Data de ida{" "}
           </label>
           <input
             type="date"
             id="checkInDate"
             name="checkInDate"
-            class="input-field"
+            className="input-field"
+            value={date}
+            onChange={(e) => [setDate(e.target.value), setError("")]}
           />
 
-          <label for="checkOutDate" class="input-title2">
+          <label htmlFor="checkOutDate" className="input-title2">
             Data de retorno{" "}
           </label>
           <input
             type="date"
             id="checkOutDate"
             name="checkOutDate"
-            class="input-field"
+            className="input-field"
+            value={datev}
+            onChange={(e) => [setDatev(e.target.value), setError("")]}
           />
 
-          <label for="moneyGoal" class="input-title2" required>
+          <label htmlFor="moneyGoal" class="input-title2" required>
             Valor que deseja arrecadar{" "}
           </label>
           <input
@@ -83,14 +114,19 @@ function Destino() {
             id="moneyGoal"
             name="moneyGoal"
             placeholder="Exemplo: 5000"
+            value={valor}
+            onChange={(e) => [setValor(e.target.value), setError("")]}
           />
-
+ <div>
+               <label className="errordestCad">{error}</label>
+           </div>
           <p>
             <button
               type="button"
               value="Continuar"
               id="form-button"
-              class="form-button"
+              className="form-button"
+              onClick={handleDestino}
             >
               {" "}
               Continuar

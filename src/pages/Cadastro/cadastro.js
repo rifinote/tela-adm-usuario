@@ -1,12 +1,46 @@
 import "./cadastro.css"
-import logo from "./logo.png";
-function Cadastro(){
+import "../../App.css";
+import logo from "../../components/Img/logo.png";
+import React, { useState } from "react";
+import {Link, useNavigate } from "react-router-dom";
+
+const Cadastro= () =>{
+ 
+  const [origin, setOrigin] = useState("");
+  const [destination, setDestination] = useState("");
+  const [money, setMoney] = useState("");
+  const [campaign, setCampaign] = useState("");
+  const [nome, setNome] = useState("");
+  const [cpf, setCpf] = useState("");
+  const [nascimento, setNascimento] = useState("");
+  const [estado, setEstado] = useState("");
+  const [city, setCity] = useState("");
+  const [campanha, setCampanha] = useState("");
+  const [perfil, setPerfil] = useState("");
+  const [encerramento, setEncerramento] = useState("");
+  const [cotrip, setCotrip] = useState("");
+  const [destino, setDestino] = useState("");
+  const [data, setData] = useState("");
+  const [hospedagem, setHospedagem] = useState("");
+  const [error, setError] = useState("");
+
+ const navigate = useNavigate();
+
+  const handleCadastro =  () => {
+    if ( !origin | !money | !campaign | !nome | !cpf | !nascimento | !estado | !city | !campanha | !perfil | !encerramento |
+       !cotrip | !destino | !data | !hospedagem ) {
+      setError("*Preencha todos os campos");
+      return;
+    }
+alert("Usuário cadatrado com sucesso!");
+    navigate("/Usuario");
+  };
     return (
       <main>
-        <img class="img1" src={logo} />
+        <img className="img1" src={logo} />
         <ul>
           <li>
-            <a href="#home">Home</a>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <a href="#news">Como Funciona</a>
@@ -17,55 +51,63 @@ function Cadastro(){
           <li>
             <a href="#about">Quem já viajou</a>
           </li>
-          <button class="secundary-button">Entrar</button>
-          <button class="secundary-button">Criar</button>
+          <Link to="/Login"><button class="secundary-button">Entrar</button></Link>
+        <Link to="/Criar"><button class="secundary-button">Criar</button></Link>
         </ul>
         <div>
-          <h1 class="principal-title">Complete seu Cadastro</h1>
+          <h1 className="principal-title">Complete seu Cadastro</h1>
           <h3 id="subtitle">Queremos saber mais sobre você!</h3>
         </div>
-        <form id="form2" action="./usuario/index.html" class="section_form">
-          <input type="hidden" id="origin" name="origin" value="" />
-          <input type="hidden" id="destination" name="destination" value="" />
-          <input type="hidden" id="moneyGoal" name="moneyGoal" value="" />
-          <input type="hidden" id="campaign" name="campaign" value="" />
+        <form id="form2" action="./usuario/index.html" className="section_form">
+          <input type="hidden" id="origin" name="origin" value={origin} onChange={(e) => [setOrigin(e.target.value), setError("")]} />
+          <input type="hidden" id="destination" name="destination" value={destination} onChange={(e) => [setDestination(e.target.value), setError("")]}/>
+          <input type="hidden" id="moneyGoal" name="moneyGoal" value={money} onChange={(e) => [setMoney(e.target.value), setError("")]} />
+          <input type="hidden" id="campaign" name="campaign" value={campaign} onChange={(e) => [setCampaign(e.target.value), setError("")]}/>
+
           <fieldset>
             <legend>Dados Pessoais</legend>
-            <label for="completeName" class="input-title">
+            <label htmlFor="completeName" className="input-title">
               Nome Completo
             </label>
             <input
               type="text"
               id="completeName"
               name="completeName"
-              class="input-field"
+              classname="input-field"
+              value={nome}
+              onChange={(e) => [setNome(e.target.value), setError("")]}
             />
 
-            <label for="cpf" class="input-title">
+
+            <label htmlFor="cpf" className="input-title">
               CPF
             </label>
             <input
               type="text"
               id="cpf"
               name="cpf"
-              class="input-field"
+              className="input-field"
               placeholder="Digite apenas números"
+              value={cpf}
+              onChange={(e) => [setCpf(e.target.value), setError("")]}
             />
 
-            <label for="birthday" class="input-title">
+            <label htmlFor="birthday" className="input-title">
               Data de Nascimento
             </label>
             <input
               type="date"
               id="birthday"
               name="birthday"
-              class="input-field"
+              className="input-field"
+              value={nascimento}
+              onChange={(e) => [setNascimento(e.target.value), setError("")]}
             />
 
-            <label for="state" class="input-title">
+            <label htmlFor="state" className="input-title">
               Estado
             </label>
-            <select id="state" name="country" class="input-field">
+            <select id="state" name="country" className="input-field" value={estado} onChange={(e) => [setEstado(e.target.value), setError("")]}>
               <option value="acre">AC</option>
               <option value="alagoas">AL</option>
               <option value="amapa">AP</option>
@@ -95,10 +137,10 @@ function Cadastro(){
               <option value="distritoFederal">DF</option>
             </select>
 
-            <label for="city" class="input-title">
+            <label htmlFor="city" className="input-title">
               Cidade
             </label>
-            <input type="text" id="city" name="city" class="input-field" />
+            <input type="text" id="city" name="city" className="input-field" value={city} onChange={(e) => [setCity(e.target.value), setError("")]}/>
           </fieldset>
 
           <fieldset>
@@ -106,67 +148,75 @@ function Cadastro(){
             <p id="note">
               *Não se preucupe. Você pode alterar essas opções depois!
             </p>
-            <label for="cover_img" class="input-title">
+            <label htmlFor="cover_img" className="input-title">
               Escolha uma foto para a capa da sua campanha
             </label>
             <input
               type="file"
               id="cover_img"
               name="cover_img"
-              class="input-field"
+              className="input-field"
+              value={campanha}
+              onChange={(e) => [setCampanha(e.target.value), setError("")]}
             />
 
-            <label for="profile_img" class="input-title">
+            <label htmlFor="profile_img" className="input-title">
               Escolha uma foto para seu perfil
             </label>
             <input
               type="file"
               id="profile_img"
               name="profile_img"
-              class="input-field"
+              className="input-field"
+              value={perfil}
+              onChange={(e) => [setPerfil(e.target.value), setError("")]}
             />
 
-            <label for="limit_date" class="input-title">
+            <label htmlFor="limit_date" className="input-title">
               Defina a data de encerramento da sua campanha
             </label>
             <input
               type="date"
               id="limit_date"
               name="limit_date"
-              class="input-field"
+              className="input-field"
+              value={encerramento}
+              onChange={(e) => [setEncerramento(e.target.value), setError("")]}
             />
 
-            <label for="mensagem" class="input-title">
+            <label htmlFor="mensagem" className="input-title">
               Hora de falar sobre sua CoTrip. Capricha!{" "}
             </label>
             <textarea
               id="mensagem"
               name="message"
-              class="input-field"
+              className="input-field"
               cols="70"
               rows="10"
+              value={cotrip}
+              onChange={(e) => [setCotrip(e.target.value), setError("")]}
             ></textarea>
 
-            <label for="destinyOption" class="input-title">
+            <label htmlFor="destinyOption" className="input-title">
               Você aceitaria outras opções de destino?
             </label>
-            <select id="destinyOption" name="destinyOption" class="input-field">
+            <select id="destinyOption" name="destinyOption" className="input-field" value={destino} onChange={(e) => [setDestino(e.target.value), setError("")]}>
               <option value="yes">Sim</option>
               <option value="no">Não</option>
             </select>
 
-            <label for="datesOption" class="input-title">
+            <label htmlFor="datesOption" className="input-title">
               Você considera datas alternativas para a viagem?
             </label>
-            <select id="datesOption" name="datesOption" class="input-field">
+            <select id="datesOption" name="datesOption" className="input-field" value={data} onChange={(e) => [setData(e.target.value), setError("")]}>
               <option value="yes">Sim</option>
               <option value="no">Não</option>
             </select>
 
-            <label for="propertyType" class="input-title">
+            <label htmlFor="propertyType" className="input-title">
               Qual tipo de hospedagem você deseja?
             </label>
-            <select id="propertyType" name="propertyType" class="input-field">
+            <select id="propertyType" name="propertyType" className="input-field" value={hospedagem} onChange={(e) => [setHospedagem(e.target.value), setError("")]}>
               <option value="hotel">Hotel</option>
               <option value="pousada">Pousada</option>
               <option value="flat">Flat</option>
@@ -175,15 +225,18 @@ function Cadastro(){
               <option value="casaTemporada">Casa de temporada</option>
             </select>
           </fieldset>
-          <input
-            type="button"
-            value="Publicar minha CoTrip!"
-            id="form-button"
-            class="form-button"
-            onmouseup="mouseUp()"
-            onmousedown="mouseDown()"
-            onclick="publish()"
-          />
+            <div>
+               <label className="errordestCad">{error}</label>
+           </div>
+          <button
+                type="button"
+                value="Continuar"
+                id="form-button"
+                className="form-button"
+                onClick={handleCadastro}
+                >
+                  Criar minha Cotrip!
+                  </button>
         </form>
       </main>
     );

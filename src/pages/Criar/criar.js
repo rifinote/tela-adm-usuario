@@ -1,17 +1,29 @@
 import "./criar.css";
+import "../../App.css";
+import React, { useState } from "react";
+import {Link, useNavigate } from "react-router-dom";
 
-function Criar() {
+const Criar = () => {
+  const [email, setEmail] = useState("");
+  const [campaign, setcampaign] = useState("");
+  const [senha, setSenha] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
+
+ const handleSignup = () => {
+   if (!email | !campaign | !senha) {
+     setError("*Preencha todos os campos");
+     return;
+   }
+   navigate("/Destino");
+ };
   return (
     <div>
-      <h1 class="title_form1">Crie agora sua CoTrip!</h1>
+      <h1 className="title_form1">Crie agora sua CoTrip!</h1>
       <h3 id="subtitle_form1">Vamos te ajudar a preparar sua campanha!</h3>
-      <div class="card_form1">
+      <div className="card_form1">
         <form id="form1" name="userForm" action="./form2.html" method="GET">
-          <input type="hidden" id="origin" name="origin" value="" />
-          <input type="hidden" id="destination" name="destination" value="" />
-          <input type="hidden" id="moneyGoal" name="moneyGoal" value="" />
-
-          <label for="campaign" class="input-title2" required>
+          <label htmlFor="campaign" className="input-title2" required>
             Quero iniciar uma campanha chamada:{" "}
           </label>
           <input
@@ -19,9 +31,11 @@ function Criar() {
             id="campaign"
             name="campaign"
             placeholder="Esse será o título da sua campanha..."
+            value={campaign}
+            onChange={(e) => [setcampaign(e.target.value), setError("")]}
           />
 
-          <label for="userEmail" class="input-title2" required>
+          <label htmlFor="userEmail" className="input-title2" required>
             E mail
           </label>
           <input
@@ -29,9 +43,11 @@ function Criar() {
             id="userEmail"
             name="userEmail"
             placeholder="seuemail@email.com"
+            value={email}
+            onChange={(e) => [setEmail(e.target.value), setError("")]}
           />
 
-          <label for="userPsw" class="input-title2" required>
+          <label htmlFor="userPsw" className="input-title2" required>
             Senha
           </label>
           <input
@@ -39,6 +55,8 @@ function Criar() {
             id="userPsw"
             name="userPsw"
             placeholder="Sua senha deve conter entre 8 e 10 caracteres entre letras e números."
+            value={senha}
+            onChange={(e) => [setSenha(e.target.value), setError("")]}
           />
           <input
             type="checkbox"
@@ -46,38 +64,40 @@ function Criar() {
             id="manterlogado"
             value=""
           />
-          <label for="manterlogado" class="input-title2">
+          <label htmlFor="manterlogado" class="input-title2">
             Aceito os{" "}
-            <a class="link" href="#">
+            <a className="link" href="#">
               Termos de Uso
             </a>{" "}
             e{" "}
-            <a class="link" href="#">
+            <a className="link" href="#">
               Política de Privacidade
             </a>
           </label>
-
+          <div>
+               <label className="error">{error}</label>
+           </div>
           <p>
             <button
               type="button"
               value="Continuar"
               id="form-button"
               class="form-button"
+              onClick={handleSignup}
             >
               {" "}
               Criar
             </button>
             <h3 class="asking">
               Ainda não tem uma Cotrip?{" "}
-              <a class="link" href="#crie">
+              <Link className="link" to="/Criar">
                 Crie
-              </a>
+              </Link>
             </h3>
           </p>
-          
         </form>
       </div>
     </div>
   );
-}
+};
 export default Criar;

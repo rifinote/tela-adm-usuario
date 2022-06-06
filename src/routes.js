@@ -5,9 +5,10 @@ import Login from "./pages/Login/login";
 import Criar from "./pages/Criar/criar";
 import Destino from "./pages/Destino/destino";
 import Cadastro from "./pages/Cadastro/cadastro";
-import TelaAdm from "./pages/TelaAdm/telaadm";
+import Adm from "./pages/Adm/telaadm";
 import Usuario from "./pages/Usuario/usuario";
 function Router() {
+  
   return (
     <BrowserRouter>
       <Routes>
@@ -16,8 +17,8 @@ function Router() {
         <Route path="/Criar" element={<Criar />} />
         <Route path="/Destino" element={<Destino />} />
         <Route path="/Cadastro" element={<Cadastro />} />
-        <Route path="/TelaAdm" element={<TelaAdm />} />
-        <Route path="/Usuario" element={<Usuario />} />
+        <Route path="/Adm" element={<Adm />} />
+        <Route path="/Usuario" element={<Usuario/>} />
       </Routes>
     </BrowserRouter>
   );

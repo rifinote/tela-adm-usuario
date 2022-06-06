@@ -1,14 +1,16 @@
 import React from "react";
+import "./home.css";
 import "../../App.css";
-import logo from "./logo.png";
-import whatsapp from "./whatsapp.png";
+import logo from "../../components/Img/logo.png";
+import whatsapp from "../../components/Img/whatsapp.png";
+import {Link}  from "react-router-dom";
 function Main() {
   return (
     <div className="home">
-      <img class="img1" src={logo} />
+      <img className="img1" src={logo} />
       <ul>
         <li>
-          <a href="#home">Home</a>
+           <Link to="/">Home</Link>
         </li>
         <li>
           <a href="#news">Como Funciona</a>
@@ -19,26 +21,26 @@ function Main() {
         <li>
           <a href="#about">Quem já viajou</a>
         </li>
-        <button class="secundary-button">Entrar</button>
-        <button class="secundary-button">Criar</button>
+        <Link to="/Login"><button className="secundary-button">Entrar</button></Link>
+        <Link to="/Criar"><button className="secundary-button">Criar</button></Link>
       </ul>
       <main>
         <div id="principal_msg">
-          <h2 class="principal_msg_title">BEM VINDO A BORDO!</h2>
-          <p class="principal_msg_sub">Que bom que você resolveu viajar.</p>
-          <button class="create-button">
+          <h2 className="principal_msg_title">BEM VINDO A BORDO!</h2>
+          <p className="principal_msg_sub">Que bom que você resolveu viajar.</p>
+          <button className="create-button">
             {" "}
-            <a href="form0.html">CRIAR MINHA COTRIP!</a>
+            <Link to="../Criar">CRIAR MINHA COTRIP!</Link>
           </button>
         </div>
 
-        <div class="zap">
+        <div className="zap">
           <a
             href="https://api.whatsapp.com/send?phone=5581992464433&text=Olá!%20Gostaria%20de%20mais%20informações%20sobre%20a%20CoTrip!"
             target="_blank"
           >
             {" "}
-            <img class="img" src={whatsapp} />
+            <img className="img" src={whatsapp} />
           </a>
         </div>
       </main>

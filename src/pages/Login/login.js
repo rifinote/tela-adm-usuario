@@ -1,16 +1,33 @@
 import "./login.css";
+import "../../App.css";
+import React, { useState } from "react";
+import {Link, useNavigate } from "react-router-dom";
 import "../Criar/criar.css";
 import "../Cadastro/cadastro.css";
+const Login = () => {
+  const navigate = useNavigate();
 
-function Login() {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [error, setError] = useState("");
+
+  const handleLogin = () => {
+    if (!email | !senha) {
+      setError("Preencha todos os campos");
+      return;
+    }
+ alert("Bem vindo de Volta!");
+    navigate("/Usuario");
+  };
+
   return (
     <div>
       <h1 id="title_form1">Faça seu Login</h1>
       <h3 id="subtitle_form1">Bem Vindo de Volta! :) </h3>
-      <a class="links" id="paracadastro"></a>
-      <a class="links" id="paralogin"></a>
-      <div class="card_form1">
-        <div class="container">
+      <a className="links" id="paracadastro"></a>
+      <a className="links" id="paralogin"></a>
+      <div className="card_form1">
+        <div className="container">
           <form
             id="form1"
             name="userForm"
@@ -21,7 +38,7 @@ function Login() {
             <input type="hidden" id="destination" name="destination" value="" />
             <input type="hidden" id="moneyGoal" name="moneyGoal" value="" />
 
-            <label for="userEmail" class="input-title2" required>
+            <label htmlFor="userEmail" className="input-title2" required>
               E mail
             </label>
             <input
@@ -29,9 +46,11 @@ function Login() {
               id="userEmail"
               name="userEmail"
               placeholder="seuemail@email.com"
+              value={email}
+              onChange={(e) => [setEmail(e.target.value), setError("")]}
             />
 
-            <label for="userPsw" class="input-title2" required>
+            <label htmlFor="userPsw" className="input-title2" required>
               Senha
             </label>
             <input
@@ -39,6 +58,8 @@ function Login() {
               id="userPsw"
               name="userPsw"
               placeholder="Sua senha deve conter entre 8 e 10 caracteres entre letras e números."
+              value={senha}
+              onChange={(e) => [setSenha(e.target.value), setError("")]}
             />
 
             <input
@@ -47,32 +68,36 @@ function Login() {
               id="manterlogado"
               value=""
             />
-            <label for="manterlogado" class="input-title2">
+            <label htmlFor="manterlogado" className="input-title2">
               Manter-me logado
             </label>
-
+           <div>
+               <label className="error">{error}</label>
+           </div>
+   
             <p>
               <button
                 type="button"
                 value="Continuar"
                 id="form-button"
-                class="form-button"
+                className="form-button"
+                onClick={handleLogin}
               >
                 {" "}
                 Entrar
               </button>
-              <h3 class="asking">
+              <p className="asking">
                 Ainda não tem uma Cotrip?{" "}
-                <a class="link" href="#crie">
+                <Link  to="/Criar" className="link" >
                   Crie
-                </a>
-              </h3>
+                </Link>
+              </p>
             </p>
           </form>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Login;
